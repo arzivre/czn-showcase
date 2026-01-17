@@ -1,0 +1,37 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { FaGithub } from "react-icons/fa6";
+
+export const Route = createFileRoute("/chat")({
+  component: RouteComponent,
+});
+
+function RouteComponent() {
+  return (
+    <main>
+      <section className="mx-auto min-h-screen max-w-2xl relative px-6 lg:px-8 pt-24 sm:pt-32">
+        <h1 className="text-3xl py-4">Let's have chat</h1>
+        <ul className="grid grid-cols-1 space-y-2">
+          <li>
+            <p className="flex items-center space-x-1 text-muted-foreground">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 126.644 96" className="w-4 h-4">
+                <path
+                  d="M81.15 0a73.742 73.742 0 00-3.36 6.794 97.868 97.868 0 00-28.994 0A67.874 67.874 0 0045.437 0a105.547 105.547 0 00-26.14 8.057C2.779 32.53-1.691 56.373.53 79.887a105.038 105.038 0 0032.05 16.088 76.912 76.912 0 006.87-11.063c-3.738-1.389-7.35-3.131-10.81-5.152.91-.657 1.794-1.338 2.653-1.995a75.255 75.255 0 0064.075 0c.86.707 1.743 1.389 2.652 1.995a68.772 68.772 0 01-10.835 5.178A76.903 76.903 0 0094.056 96a104.99 104.99 0 0032.051-16.063c2.626-27.277-4.496-50.917-18.817-71.855A103.923 103.923 0 0081.175.05L81.15 0zM42.28 65.414c-6.238 0-11.416-5.657-11.416-12.653s4.976-12.679 11.391-12.679 11.517 5.708 11.416 12.679c-.101 6.97-5.026 12.653-11.39 12.653zm42.078 0c-6.264 0-11.391-5.657-11.391-12.653s4.975-12.679 11.39-12.679S95.85 45.79 95.749 52.761c-.1 6.97-5.026 12.653-11.39 12.653z"
+                  fill="#5865f2"
+                />
+              </svg>
+              <span>Discord: </span>
+              <a href="https://discord.gg/gFVQ4tN3" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary underline">Server Invitation</a>
+            </p>
+          </li>
+          <li>
+            <p className="flex items-center space-x-1 text-muted-foreground">
+              <FaGithub className="w-4 h-4" />
+              <span>Github Issues: </span>
+              <a href="https://github.com/arzivre/czn-showcase/issues" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary underline">arzivre/czn-showcase</a>
+            </p>
+          </li>
+        </ul>
+      </section>
+    </main >
+  );
+}

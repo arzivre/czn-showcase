@@ -1,0 +1,1 @@
+ALTER TABLE "czn_saved_data" DROP COLUMN "description_json";

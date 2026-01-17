@@ -1,0 +1,1 @@
+CREATE INDEX "czn_saved_data_createdAt_idx" ON "czn_saved_data" USING btree ("created_at");

@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "czn-showcase",
+  "compatibility_date": "2025-10-11",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "main": "./src/server.ts",
+  "observability": {
+    "enabled": true
+  },
+  "r2_buckets": [
+    {
+      "binding": "IMAGES",
+      "bucket_name": "czn-showcase"
+    },
+  ],
+  "hyperdrive": [
+    {
+      "binding": "HYPERDRIVE",
+      "id": "2b5e7cee5eed4d2eba9ce82183d1f92a",
+    }
+  ]
+}
