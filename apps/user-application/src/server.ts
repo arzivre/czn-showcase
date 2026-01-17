@@ -32,8 +32,8 @@ export default {
           },
         },
         discord: {
-          clientId: process.env.DISCORD_CLIENT_ID,
-          clientSecret: process.env.DISCORD_CLIENT_SECRET,
+          clientId: env.DISCORD_CLIENT_ID,
+          clientSecret: env.DISCORD_CLIENT_SECRET,
           permissions: 2048 | 16384,
           mapProfileToUser: async (profile) => {
             const username = await generateUniqueUsername(
