@@ -65,7 +65,7 @@ function RouteComponent() {
     multiple: false
   });
 
-  const { mutate: updateSavedDataMutate } = useMutation({
+  const { mutate: updateSavedDataMutate, isPending } = useMutation({
     mutationFn: async (value: TUpdateSavedDataValue) => {
       let payload: TUpdateSavedData = {
         id: data.id as string,
@@ -266,14 +266,9 @@ function RouteComponent() {
           <Button type="button" variant="outline" onClick={() => form.reset()}>
             Reset
           </Button>
-          <form.Subscribe
-            selector={(state) => [state.canSubmit, state.isSubmitting]}
-            children={([canSubmit, isSubmitting]) => (
-              <Button type="submit" disabled={!canSubmit} className='cursor-pointer disabled:cursor-not-allowed'>
-                {isSubmitting ? 'Uploading...' : 'Submit'}
-              </Button>
-            )}
-          />
+          <Button type="submit" disabled={isPending}>
+            {isPending ? 'Uploading...' : 'Submit'}
+          </Button>
         </div>
 
         {/* <form.Subscribe
