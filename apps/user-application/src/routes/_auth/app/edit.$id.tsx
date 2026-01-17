@@ -269,7 +269,7 @@ function RouteComponent() {
           <form.Subscribe
             selector={(state) => [state.canSubmit, state.isSubmitting]}
             children={([canSubmit, isSubmitting]) => (
-              <Button type="submit" disabled={!canSubmit}>
+              <Button type="submit" disabled={!canSubmit} className='cursor-pointer disabled:cursor-not-allowed'>
                 {isSubmitting ? 'Uploading...' : 'Submit'}
               </Button>
             )}

@@ -234,11 +234,12 @@ function RouteComponent() {
             Reset
           </Button>
           <form.Subscribe
-            selector={(state) => [state.errorMap]}
-            children={([canSubmit, isSubmitting,]) =>
-              <Button type="submit" disabled={!canSubmit}>
+            selector={(state) => [state.canSubmit, state.isSubmitting]}
+            children={([canSubmit, isSubmitting]) => (
+              <Button type="submit" disabled={!canSubmit} className='cursor-pointer disabled:cursor-not-allowed'>
                 {isSubmitting ? 'Uploading...' : 'Submit'}
-              </Button>}
+              </Button>
+            )}
           />
         </div>
 
