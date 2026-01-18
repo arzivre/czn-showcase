@@ -61,7 +61,7 @@ function RouteComponent() {
     })
 
     return (
-        <main className="mx-auto w-full max-w-[900px] relative px-0 lg:px-8 py-24 sm:py-32">
+        <main className="mx-auto w-full max-w-[900px] relative px-4 lg:px-8 py-24 sm:py-32">
             <h1 className="text-xl py-4 lg:text-3xl lg:py-8">Update Display Name</h1>
             <p className='mb-8 text-muted-foreground'>Current Display Name: <span className='text-primary'>{user?.displayUsername}</span></p>
             <form

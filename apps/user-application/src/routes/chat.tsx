@@ -24,7 +24,7 @@ function RouteComponent() {
             </p>
           </li>
           <li>
-            <p className="flex items-center space-x-1 text-muted-foreground">
+            <p className="flex flex-wrap items-center space-x-1 text-muted-foreground">
               <FaGithub className="w-4 h-4" />
               <span>Github Issues: </span>
               <a href="https://github.com/arzivre/czn-showcase/issues" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary underline">arzivre/czn-showcase</a>

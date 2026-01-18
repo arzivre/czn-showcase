@@ -81,12 +81,12 @@ function RouteComponent() {
   };
 
   return (
-    <main className="mx-auto w-full relative px-0 lg:px-8 py-24 sm:py-32">
+    <main className="mx-auto w-full relative px-4 lg:px-8 py-24 sm:py-32">
       <section>
         <h1 className='py-8 text-primary text-2xl'>
           My Saved Data
         </h1>
-        <ul className="grid grid-cols-5 gap-4 mb-8">
+        <ul className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
           {savedDataQuery?.savedData.map(saved => (
             <li key={saved.id} className="border rounded shadow">
               <Link

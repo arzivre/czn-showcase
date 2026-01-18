@@ -98,9 +98,9 @@ function LandingPage() {
           placeholder="Type to search..."
           className="mb-8 rounded"
         />
-        <ul className="grid grid-cols-5 gap-4 mb-8">
+        <ul className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
           {savedDataQuery.data.savedData.map(saved => (
-            <li key={saved.id} className="border rounded shadow overflow-hidden">
+            <li key={saved.id} className="border rounded shadow overflow-hidden hover:border-primary">
               <Link
                 to="/saved-data/$id"
                 params={{

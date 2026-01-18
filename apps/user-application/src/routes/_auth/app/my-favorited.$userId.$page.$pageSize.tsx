@@ -44,7 +44,7 @@ function RouteComponent() {
     const { totalPages, hasPrevPage, hasNextPage } = dataQuery.pagination
 
     return (
-        <main className="mx-auto w-full relative px-0 lg:px-8 py-24 sm:py-32">
+        <main className="mx-auto w-full relative px-4 lg:px-8 py-24 sm:py-32">
             <section>
                 <h1 className='py-8 text-primary text-2xl'>
                     My Favorited Saved Data
@@ -54,9 +54,9 @@ function RouteComponent() {
                         You haven't favorited any saved data.
                     </p>
                     : null}
-                <ul className="grid grid-cols-5 gap-4 mb-8">
+                <ul className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
                     {dataQuery.bookmarkedData.map(saved => (
-                        <li key={saved.id} className="border rounded shadow overflow-hidden">
+                        <li key={saved.id} className="border rounded shadow overflow-hidden hover:border-primary">
                             <Link
                                 to="/saved-data/$id"
                                 params={{

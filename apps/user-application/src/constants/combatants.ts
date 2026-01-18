@@ -13,6 +13,7 @@ export const COMBATANS = [
     { "value": "maribell", "label": "Maribell" },
     { "value": "mei_lin", "label": "Mei Lin" },
     { "value": "mika", "label": "Mika" },
+    { "value": "narja", "label": "Narja" },
     { "value": "nia", "label": "Nia" },
     { "value": "orlea", "label": "Orlea" },
     { "value": "owen", "label": "Owen" },
@@ -26,7 +27,8 @@ export const COMBATANS = [
     { "value": "yuki", "label": "Yuki" }
 ]
 
-export const COMBATANS_ENUMS = ["amir",
+export const COMBATANS_ENUMS = [
+    "amir",
     "beryl",
     "cassius",
     "chizuru",
@@ -40,6 +42,7 @@ export const COMBATANS_ENUMS = ["amir",
     "maribell",
     "mei_lin",
     "mika",
+    "narja",
     "nia",
     "orlea",
     "owen",
@@ -50,4 +53,5 @@ export const COMBATANS_ENUMS = ["amir",
     "sereniel",
     "tressa",
     "veronica",
-    "yuki"]
+    "yuki"
+]
