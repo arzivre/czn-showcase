@@ -94,11 +94,11 @@ function RouteComponent() {
   return (
     <main>
       <section className="container mx-auto w-full max-w-7xl flex flex-col space-y-4 relative px-6 lg:px-8 py-24 sm:py-32 ">
-        <div className='grid grid-cols-6 items-center justify-between'>
-          <h1 className='col-span-5 py-2 text-4xl text-left'>
+        <div className='flex flex-col md:grid grid-cols-12 items-center justify-between'>
+          <h1 className='col-span-9 w-full py-2 text-2xl text-left lg:col-span-10 lg:text-4xl'>
             {savedData?.title}
           </h1>
-          <div className='flex items-center justify-end gap-4'>
+          <div className='col-span-3 w-full flex items-center justify-end gap-4 text-muted-foreground lg:col-span-2'>
             <button type="button"
               onClick={() => batcher.addItem(null)}
               className='group cursor-pointer hover:underline'
@@ -127,8 +127,8 @@ function RouteComponent() {
           </div>
         </div>
         <img alt={savedData?.title} src={`${ASSETS_URL}/${savedData?.imgUrl}`} className='w-full h-auto' />
-        <div className='flex py-8'>
-          <div className='w-1/3 flex flex-col space-y-2 text-muted-foreground'>
+        <div className='flex flex-col py-8 lg:flex-row'>
+          <div className='flex flex-col space-y-2 text-muted-foreground lg:w-1/3'>
             <div className='grid grid-cols-2'>
               <p>Author:</p>
               <Link to={`/user/$userId/$page/$size`} params={{ userId: savedData?.userId!, page: '1', size: '25' }}>
@@ -158,10 +158,9 @@ function RouteComponent() {
                 {savedData?.bookmarkCount}
               </p>
             </div>
-
           </div>
-          <div className='w-2/3'>
-            <h2 className='pb-4 text-xl text-muted-foreground'>Description</h2>
+          <div className='pt-4 lg:w-2/3 lg:pt-0'>
+            <h2 className='pb-4 text-xl'>Author Notes:</h2>
             <article dangerouslySetInnerHTML={{ __html: savedData?.descriptionHtml! }} className='w-full max-w-full prose prose-headings:text-primary prose-p:text-muted-foreground' />
           </div>
         </div>
