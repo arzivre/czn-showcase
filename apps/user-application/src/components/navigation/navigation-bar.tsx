@@ -280,12 +280,14 @@ export function NavigationBar() {
                           )}
                         </a>
                       ) : (
-                        <Link
-                          to={item.href}
-                          className="flex items-center w-full px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-300 hover:bg-accent/50 text-left"
-                        >
-                          {item.label}
-                        </Link>
+                        <SheetClose asChild>
+                          <Link
+                            to={item.href}
+                            className="flex items-center w-full px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-300 hover:bg-accent/50 text-left"
+                          >
+                            {item.label}
+                          </Link>
+                        </SheetClose>
                       )}
                     </div>
                   ))}

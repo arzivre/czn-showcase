@@ -1,7 +1,7 @@
 "use client"
 
 import { EditorContent, EditorContext, useEditor } from "@tiptap/react"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
 // --- Tiptap Core Extensions ---
 import { Highlight } from "@tiptap/extension-highlight"
@@ -74,7 +74,6 @@ export function TiptapSimpleEditor({ initialValue = '<p>My saved data</p>', hand
   const [mobileView, setMobileView] = useState<"main" | "highlighter" | "link">(
     "main"
   )
-  const toolbarRef = useRef<HTMLDivElement>(null)
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -132,10 +131,9 @@ export function TiptapSimpleEditor({ initialValue = '<p>My saved data</p>', hand
   }
 
   return (
-    <div className="simple-editor-wrapper  border">
+    <div className="simple-editor-wrapper">
       <EditorContext.Provider value={{ editor }}>
         <Toolbar
-          ref={toolbarRef}
         >
           {mobileView === "main" ? (
             <MainToolbarContent
@@ -160,6 +158,7 @@ export function TiptapSimpleEditor({ initialValue = '<p>My saved data</p>', hand
     </div>
   )
 }
+
 
 function SkeletonTiptapSimpleEditor() {
   return (

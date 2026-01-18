@@ -100,7 +100,7 @@ function RouteComponent() {
     multiple: false
   });
   return (
-    <main className="mx-auto w-full max-w-[900px] relative px-0 lg:px-8 py-24 sm:py-32">
+    <main className="mx-auto w-full max-w-[900px] relative px-4 lg:px-8 py-24 sm:py-32">
       <h1 className="text-xl py-4 lg:text-3xl lg:py-8">Post Combatant Saved Data</h1>
       <form
         id="post-czn-saved-data-form"
