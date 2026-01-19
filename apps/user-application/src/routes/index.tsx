@@ -15,6 +15,7 @@ import { getPaginatedSavedDataWithBookmarks } from "@repo/data-ops/queries/czn-s
 import { useAsyncDebouncer } from '@tanstack/react-pacer/async-debouncer';
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Image } from "@unpic/react";
 import React from "react";
 import { FaHeart } from "react-icons/fa6";
 import z from "zod";
@@ -108,8 +109,14 @@ function LandingPage() {
                 }}
                 preloadDelay={600}
               >
-                <img alt={saved.title} src={`${ASSETS_URL}/${saved.imgUrl}`}
-                  className="aspect-video object-cover w-full" />
+                <Image
+                  alt={saved.title}
+                  src={`${ASSETS_URL}/${saved.imgUrl}`}
+                  layout="constrained"
+                  width={467.2}
+                  height={262.8}
+                  className="aspect-video object-cover w-full"
+                />
                 <div className="grid grid-cols-[1fr_auto] items-center justify-end p-2 border-t">
                   <p className="text-left line-clamp-1">
                     {saved.title}

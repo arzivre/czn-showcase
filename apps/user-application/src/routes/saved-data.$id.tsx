@@ -8,6 +8,7 @@ import { Heart, Share2 } from 'lucide-react';
 import { FaHeart } from 'react-icons/fa6';
 import { toast } from 'sonner';
 import { useBatcher } from '@tanstack/react-pacer/batcher'
+import { Image } from "@unpic/react";
 
 type SavedDataDetail = Promise<{
   displayUsername: string | null;
@@ -126,7 +127,11 @@ function RouteComponent() {
             </button>
           </div>
         </div>
-        <img alt={savedData?.title} src={`${ASSETS_URL}/${savedData?.imgUrl}`} className='w-full h-auto' />
+        <Image
+          alt={savedData?.title}
+          src={`${ASSETS_URL}/${savedData?.imgUrl}`}
+          layout='fullWidth'
+        />
         <div className='flex flex-col py-8 lg:flex-row'>
           <div className='flex flex-col space-y-2 text-muted-foreground lg:w-1/3'>
             <div className='grid grid-cols-2'>
