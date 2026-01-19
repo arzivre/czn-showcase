@@ -29,11 +29,10 @@ import { Route as AuthAppNameRouteImport } from './routes/_auth/app/name'
 import { Route as UserUserIdPageSizeRouteImport } from './routes/user.$userId.$page.$size'
 import { Route as ApiPaginatedSavedDataPageSizeRouteImport } from './routes/api/paginated-saved-data.$page.$size'
 import { Route as ApiMostFavoritedPageSizeRouteImport } from './routes/api/most-favorited.$page.$size'
-import { Route as ApiBookmarkUserIdSavedDataIdRouteImport } from './routes/api/bookmark.$userId.$savedDataId'
 import { Route as AuthAppPolarSubscriptionsRouteImport } from './routes/_auth/app/polar/subscriptions'
 import { Route as AuthAppPolarPortalRouteImport } from './routes/_auth/app/polar/portal'
 import { Route as AuthAppEditIdRouteImport } from './routes/_auth/app/edit.$id'
-import { Route as ApiProtectedUserSavedDataPageSizeRouteImport } from './routes/api/protected/user-saved-data.$page.$size'
+import { Route as ApiUserSavedDataUserIdPageSizeRouteImport } from './routes/api/user-saved-data.$userId.$page.$size'
 import { Route as ApiProtectedUserFavoritedPageSizeRouteImport } from './routes/api/protected/user-favorited.$page.$size'
 import { Route as AuthAppPolarCheckoutSuccessRouteImport } from './routes/_auth/app/polar/checkout.success'
 import { Route as AuthAppMySavedDataUserIdPagePageSizeRouteImport } from './routes/_auth/app/my-saved-data.$userId.$page.$pageSize'
@@ -139,12 +138,6 @@ const ApiMostFavoritedPageSizeRoute =
     path: '/api/most-favorited/$page/$size',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiBookmarkUserIdSavedDataIdRoute =
-  ApiBookmarkUserIdSavedDataIdRouteImport.update({
-    id: '/api/bookmark/$userId/$savedDataId',
-    path: '/api/bookmark/$userId/$savedDataId',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const AuthAppPolarSubscriptionsRoute =
   AuthAppPolarSubscriptionsRouteImport.update({
     id: '/app/polar/subscriptions',
@@ -161,10 +154,10 @@ const AuthAppEditIdRoute = AuthAppEditIdRouteImport.update({
   path: '/app/edit/$id',
   getParentRoute: () => AuthRouteRoute,
 } as any)
-const ApiProtectedUserSavedDataPageSizeRoute =
-  ApiProtectedUserSavedDataPageSizeRouteImport.update({
-    id: '/api/protected/user-saved-data/$page/$size',
-    path: '/api/protected/user-saved-data/$page/$size',
+const ApiUserSavedDataUserIdPageSizeRoute =
+  ApiUserSavedDataUserIdPageSizeRouteImport.update({
+    id: '/api/user-saved-data/$userId/$page/$size',
+    path: '/api/user-saved-data/$userId/$page/$size',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiProtectedUserFavoritedPageSizeRoute =
@@ -211,13 +204,12 @@ export interface FileRoutesByFullPath {
   '/app/edit/$id': typeof AuthAppEditIdRoute
   '/app/polar/portal': typeof AuthAppPolarPortalRoute
   '/app/polar/subscriptions': typeof AuthAppPolarSubscriptionsRoute
-  '/api/bookmark/$userId/$savedDataId': typeof ApiBookmarkUserIdSavedDataIdRoute
   '/api/most-favorited/$page/$size': typeof ApiMostFavoritedPageSizeRoute
   '/api/paginated-saved-data/$page/$size': typeof ApiPaginatedSavedDataPageSizeRoute
   '/user/$userId/$page/$size': typeof UserUserIdPageSizeRoute
   '/app/polar/checkout/success': typeof AuthAppPolarCheckoutSuccessRoute
   '/api/protected/user-favorited/$page/$size': typeof ApiProtectedUserFavoritedPageSizeRoute
-  '/api/protected/user-saved-data/$page/$size': typeof ApiProtectedUserSavedDataPageSizeRoute
+  '/api/user-saved-data/$userId/$page/$size': typeof ApiUserSavedDataUserIdPageSizeRoute
   '/app/my-favorited/$userId/$page/$pageSize': typeof AuthAppMyFavoritedUserIdPagePageSizeRoute
   '/app/my-saved-data/$userId/$page/$pageSize': typeof AuthAppMySavedDataUserIdPagePageSizeRoute
 }
@@ -240,13 +232,12 @@ export interface FileRoutesByTo {
   '/app/edit/$id': typeof AuthAppEditIdRoute
   '/app/polar/portal': typeof AuthAppPolarPortalRoute
   '/app/polar/subscriptions': typeof AuthAppPolarSubscriptionsRoute
-  '/api/bookmark/$userId/$savedDataId': typeof ApiBookmarkUserIdSavedDataIdRoute
   '/api/most-favorited/$page/$size': typeof ApiMostFavoritedPageSizeRoute
   '/api/paginated-saved-data/$page/$size': typeof ApiPaginatedSavedDataPageSizeRoute
   '/user/$userId/$page/$size': typeof UserUserIdPageSizeRoute
   '/app/polar/checkout/success': typeof AuthAppPolarCheckoutSuccessRoute
   '/api/protected/user-favorited/$page/$size': typeof ApiProtectedUserFavoritedPageSizeRoute
-  '/api/protected/user-saved-data/$page/$size': typeof ApiProtectedUserSavedDataPageSizeRoute
+  '/api/user-saved-data/$userId/$page/$size': typeof ApiUserSavedDataUserIdPageSizeRoute
   '/app/my-favorited/$userId/$page/$pageSize': typeof AuthAppMyFavoritedUserIdPagePageSizeRoute
   '/app/my-saved-data/$userId/$page/$pageSize': typeof AuthAppMySavedDataUserIdPagePageSizeRoute
 }
@@ -272,13 +263,12 @@ export interface FileRoutesById {
   '/_auth/app/edit/$id': typeof AuthAppEditIdRoute
   '/_auth/app/polar/portal': typeof AuthAppPolarPortalRoute
   '/_auth/app/polar/subscriptions': typeof AuthAppPolarSubscriptionsRoute
-  '/api/bookmark/$userId/$savedDataId': typeof ApiBookmarkUserIdSavedDataIdRoute
   '/api/most-favorited/$page/$size': typeof ApiMostFavoritedPageSizeRoute
   '/api/paginated-saved-data/$page/$size': typeof ApiPaginatedSavedDataPageSizeRoute
   '/user/$userId/$page/$size': typeof UserUserIdPageSizeRoute
   '/_auth/app/polar/checkout/success': typeof AuthAppPolarCheckoutSuccessRoute
   '/api/protected/user-favorited/$page/$size': typeof ApiProtectedUserFavoritedPageSizeRoute
-  '/api/protected/user-saved-data/$page/$size': typeof ApiProtectedUserSavedDataPageSizeRoute
+  '/api/user-saved-data/$userId/$page/$size': typeof ApiUserSavedDataUserIdPageSizeRoute
   '/_auth/app/my-favorited/$userId/$page/$pageSize': typeof AuthAppMyFavoritedUserIdPagePageSizeRoute
   '/_auth/app/my-saved-data/$userId/$page/$pageSize': typeof AuthAppMySavedDataUserIdPagePageSizeRoute
 }
@@ -303,13 +293,12 @@ export interface FileRouteTypes {
     | '/app/edit/$id'
     | '/app/polar/portal'
     | '/app/polar/subscriptions'
-    | '/api/bookmark/$userId/$savedDataId'
     | '/api/most-favorited/$page/$size'
     | '/api/paginated-saved-data/$page/$size'
     | '/user/$userId/$page/$size'
     | '/app/polar/checkout/success'
     | '/api/protected/user-favorited/$page/$size'
-    | '/api/protected/user-saved-data/$page/$size'
+    | '/api/user-saved-data/$userId/$page/$size'
     | '/app/my-favorited/$userId/$page/$pageSize'
     | '/app/my-saved-data/$userId/$page/$pageSize'
   fileRoutesByTo: FileRoutesByTo
@@ -332,13 +321,12 @@ export interface FileRouteTypes {
     | '/app/edit/$id'
     | '/app/polar/portal'
     | '/app/polar/subscriptions'
-    | '/api/bookmark/$userId/$savedDataId'
     | '/api/most-favorited/$page/$size'
     | '/api/paginated-saved-data/$page/$size'
     | '/user/$userId/$page/$size'
     | '/app/polar/checkout/success'
     | '/api/protected/user-favorited/$page/$size'
-    | '/api/protected/user-saved-data/$page/$size'
+    | '/api/user-saved-data/$userId/$page/$size'
     | '/app/my-favorited/$userId/$page/$pageSize'
     | '/app/my-saved-data/$userId/$page/$pageSize'
   id:
@@ -363,13 +351,12 @@ export interface FileRouteTypes {
     | '/_auth/app/edit/$id'
     | '/_auth/app/polar/portal'
     | '/_auth/app/polar/subscriptions'
-    | '/api/bookmark/$userId/$savedDataId'
     | '/api/most-favorited/$page/$size'
     | '/api/paginated-saved-data/$page/$size'
     | '/user/$userId/$page/$size'
     | '/_auth/app/polar/checkout/success'
     | '/api/protected/user-favorited/$page/$size'
-    | '/api/protected/user-saved-data/$page/$size'
+    | '/api/user-saved-data/$userId/$page/$size'
     | '/_auth/app/my-favorited/$userId/$page/$pageSize'
     | '/_auth/app/my-saved-data/$userId/$page/$pageSize'
   fileRoutesById: FileRoutesById
@@ -388,12 +375,11 @@ export interface RootRouteChildren {
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiSavedDataIdRoute: typeof ApiSavedDataIdRoute
   ApiUserDetailsUserIdRoute: typeof ApiUserDetailsUserIdRoute
-  ApiBookmarkUserIdSavedDataIdRoute: typeof ApiBookmarkUserIdSavedDataIdRoute
   ApiMostFavoritedPageSizeRoute: typeof ApiMostFavoritedPageSizeRoute
   ApiPaginatedSavedDataPageSizeRoute: typeof ApiPaginatedSavedDataPageSizeRoute
   UserUserIdPageSizeRoute: typeof UserUserIdPageSizeRoute
   ApiProtectedUserFavoritedPageSizeRoute: typeof ApiProtectedUserFavoritedPageSizeRoute
-  ApiProtectedUserSavedDataPageSizeRoute: typeof ApiProtectedUserSavedDataPageSizeRoute
+  ApiUserSavedDataUserIdPageSizeRoute: typeof ApiUserSavedDataUserIdPageSizeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -538,13 +524,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiMostFavoritedPageSizeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/bookmark/$userId/$savedDataId': {
-      id: '/api/bookmark/$userId/$savedDataId'
-      path: '/api/bookmark/$userId/$savedDataId'
-      fullPath: '/api/bookmark/$userId/$savedDataId'
-      preLoaderRoute: typeof ApiBookmarkUserIdSavedDataIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_auth/app/polar/subscriptions': {
       id: '/_auth/app/polar/subscriptions'
       path: '/app/polar/subscriptions'
@@ -566,11 +545,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthAppEditIdRouteImport
       parentRoute: typeof AuthRouteRoute
     }
-    '/api/protected/user-saved-data/$page/$size': {
-      id: '/api/protected/user-saved-data/$page/$size'
-      path: '/api/protected/user-saved-data/$page/$size'
-      fullPath: '/api/protected/user-saved-data/$page/$size'
-      preLoaderRoute: typeof ApiProtectedUserSavedDataPageSizeRouteImport
+    '/api/user-saved-data/$userId/$page/$size': {
+      id: '/api/user-saved-data/$userId/$page/$size'
+      path: '/api/user-saved-data/$userId/$page/$size'
+      fullPath: '/api/user-saved-data/$userId/$page/$size'
+      preLoaderRoute: typeof ApiUserSavedDataUserIdPageSizeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/protected/user-favorited/$page/$size': {
@@ -660,14 +639,12 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiSavedDataIdRoute: ApiSavedDataIdRoute,
   ApiUserDetailsUserIdRoute: ApiUserDetailsUserIdRoute,
-  ApiBookmarkUserIdSavedDataIdRoute: ApiBookmarkUserIdSavedDataIdRoute,
   ApiMostFavoritedPageSizeRoute: ApiMostFavoritedPageSizeRoute,
   ApiPaginatedSavedDataPageSizeRoute: ApiPaginatedSavedDataPageSizeRoute,
   UserUserIdPageSizeRoute: UserUserIdPageSizeRoute,
   ApiProtectedUserFavoritedPageSizeRoute:
     ApiProtectedUserFavoritedPageSizeRoute,
-  ApiProtectedUserSavedDataPageSizeRoute:
-    ApiProtectedUserSavedDataPageSizeRoute,
+  ApiUserSavedDataUserIdPageSizeRoute: ApiUserSavedDataUserIdPageSizeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

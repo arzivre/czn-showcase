@@ -1,9 +1,4 @@
-import { ASSETS_URL } from '@/constants/assets-url';
-import { getPaginatedSavedDataWithBookmarks } from '@repo/data-ops/queries/czn-saved-data';
-import { getUserData } from '@repo/data-ops/queries/user';
-import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
-import { createFileRoute, Link, notFound } from '@tanstack/react-router';
-import { FaHeart } from 'react-icons/fa6';
+import { ListSavedData } from "@/components/contents/list-saved-data";
 import {
   getPageArray,
   Pagination,
@@ -15,6 +10,10 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { cn } from '@/lib/utils';
+import { getPaginatedSavedDataWithBookmarks } from '@repo/data-ops/queries/czn-saved-data';
+import { getUserData } from '@repo/data-ops/queries/user';
+import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
+import { createFileRoute, notFound } from '@tanstack/react-router';
 
 export const userDetailssQueryOptions = (userId: string) =>
   queryOptions({
@@ -26,7 +25,7 @@ export const userDetailssQueryOptions = (userId: string) =>
 export const userSavedDatasQueryOptions = (userId: string, page: string, size: string) =>
   queryOptions({
     queryKey: ['user-saved-data', userId, page, size],
-    queryFn: () => fetch(`/api/protected/user-saved-data/${page}/${size}`)
+    queryFn: () => fetch(`/api/user-saved-data/${userId}/${page}/${size}`)
       .then((res) => res.json() as ReturnType<typeof getPaginatedSavedDataWithBookmarks>)
   })
 
@@ -53,28 +52,9 @@ function RouteComponent() {
         <h1 className='py-8 text-primary text-2xl'>
           {data.displayUsername} Saved Data
         </h1>
-        <ul className="grid grid-cols-5 gap-4 mb-8">
-          {savedDataQuery.savedData.map(saved => (
-            <li key={saved.id} className="border rounded shadow">
-              <Link
-                to="/saved-data/$id"
-                params={{
-                  id: String(saved.id),
-                }}>
-                <img alt={saved.title} src={`${ASSETS_URL}/${saved.imgUrl}`}
-                  className="aspect-video object-cover w-full" />
-                <div className="flex items-center gap-1 p-2">
-                  <p className="flex items-center gap-1 text-rose-400">
-                    <FaHeart className="" /> {saved.bookmarkCount}
-                  </p>
-                  <p className="text-left p-1 line-clamp-1">
-                    {saved.title}
-                  </p>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
+
+        <ListSavedData savedData={savedDataQuery.savedData} />
+
         <Pagination>
           <PaginationContent>
             <PaginationItem >
