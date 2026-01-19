@@ -1,51 +1,49 @@
 import { getDb } from "@/database/setup";
+import { neon } from "@neondatabase/serverless";
 import { and, asc, count, desc, eq, getTableColumns, sql } from "drizzle-orm";
 import { czn_bookmarks, czn_saved_data } from "../drizzle/schema";
 
+const connectionString = `postgres://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}`;
+
 // When adding a bookmark
 async function addBookmark(userId: string, savedDataId: string) {
-    const db = getDb();
-    await db.transaction(async (tx) => {
+    const sql = neon(connectionString);
+
+    await sql.transaction([
         // Insert bookmark
-        await tx.insert(czn_bookmarks).values({
-            userId,
-            savedDataId,
-        });
+        sql`
+            INSERT INTO czn_bookmarks (user_id, saved_data_id)
+            VALUES (${userId}, ${savedDataId})
+        `,
 
         // Increment count
-        await tx
-            .update(czn_saved_data)
-            .set({
-                bookmarkCount: sql`${czn_saved_data.bookmarkCount} + 1`
-            })
-            .where(eq(czn_saved_data.id, savedDataId));
-    });
-    return { action: "added" };
+        sql`
+            UPDATE czn_saved_data
+            SET bookmark_count = bookmark_count + 1
+            WHERE id = ${savedDataId}
+        `
+    ]);
 }
 
 // When removing a bookmark
 async function removeBookmark(userId: string, savedDataId: string) {
-    const db = getDb();
-    await db.transaction(async (tx) => {
+    const sql = neon(connectionString);
+
+    await sql.transaction([
         // Delete bookmark
-        await tx
-            .delete(czn_bookmarks)
-            .where(
-                and(
-                    eq(czn_bookmarks.userId, userId),
-                    eq(czn_bookmarks.savedDataId, savedDataId)
-                )
-            );
+        sql`
+            DELETE FROM czn_bookmarks
+            WHERE user_id = ${userId}
+            AND saved_data_id = ${savedDataId}
+        `,
 
         // Decrement count
-        await tx
-            .update(czn_saved_data)
-            .set({
-                bookmarkCount: sql`${czn_saved_data.bookmarkCount} - 1`
-            })
-            .where(eq(czn_saved_data.id, savedDataId));
-    });
-    return { action: "removed" };
+        sql`
+            UPDATE czn_saved_data
+            SET bookmark_count = bookmark_count - 1
+            WHERE id = ${savedDataId}
+        `
+    ]);
 }
 
 export const getUserBookmarks = async (userId: string) => {
@@ -83,6 +81,7 @@ export const toggleBookmark = async (userId: string, savedDataId: string) => {
             eq(czn_bookmarks.savedDataId, savedDataId)
         ),
     });
+    console.log(existing)
 
     if (existing) {
         await removeBookmark(userId, savedDataId);

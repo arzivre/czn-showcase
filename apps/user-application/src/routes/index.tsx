@@ -1,3 +1,4 @@
+import { ListSavedData } from "@/components/contents/list-saved-data";
 import { Input } from "@/components/ui/input";
 import {
   getPageArray,
@@ -9,15 +10,12 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { ASSETS_URL } from "@/constants/assets-url";
 import { cn } from "@/lib/utils";
 import { getPaginatedSavedDataWithBookmarks } from "@repo/data-ops/queries/czn-saved-data";
 import { useAsyncDebouncer } from '@tanstack/react-pacer/async-debouncer';
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Image } from "@unpic/react";
+import { createFileRoute } from "@tanstack/react-router";
 import React from "react";
-import { FaHeart } from "react-icons/fa6";
 import z from "zod";
 
 const paginationSearchSchema = z.object({
@@ -99,36 +97,7 @@ function LandingPage() {
           placeholder="Type to search..."
           className="mb-8 rounded"
         />
-        <ul className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
-          {savedDataQuery.data.savedData.map(saved => (
-            <li key={saved.id} className="border rounded shadow overflow-hidden hover:border-primary">
-              <Link
-                to="/saved-data/$id"
-                params={{
-                  id: String(saved.id),
-                }}
-                preloadDelay={600}
-              >
-                <Image
-                  alt={saved.title}
-                  src={`${ASSETS_URL}/${saved.imgUrl}`}
-                  layout="constrained"
-                  width={467.2}
-                  height={262.8}
-                  className="aspect-video object-cover w-full"
-                />
-                <div className="grid grid-cols-[1fr_auto] items-center justify-end p-2 border-t">
-                  <p className="text-left line-clamp-1">
-                    {saved.title}
-                  </p>
-                  <p className="flex items-center gap-1 text-rose-400">
-                    <FaHeart className="" /> {saved.bookmarkCount}
-                  </p>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <ListSavedData savedData={savedDataQuery.data.savedData} />
         <Pagination>
           <PaginationContent>
             <PaginationItem >

@@ -1,3 +1,4 @@
+import { ListSavedData } from "@/components/contents/list-saved-data"
 import {
     getPageArray,
     Pagination,
@@ -8,23 +9,17 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination"
-import { ASSETS_URL } from '@/constants/assets-url'
 import { protectedRequestMiddleware } from '@/core/middleware/auth'
 import { cn } from '@/lib/utils'
 import { getUserBookmarkedData } from '@repo/data-ops/queries/bookmark-saved-data'
 import { keepPreviousData, queryOptions, useSuspenseQuery } from '@tanstack/react-query'
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { FaHeart } from 'react-icons/fa6'
-
-function getUserFavoritedData(page: string, pageSize: string) {
-    return fetch(`/api/protected/user-favorited/${page}/${pageSize}`)
-        .then((res) => res.json() as ReturnType<typeof getUserBookmarkedData>)
-}
+import { createFileRoute } from '@tanstack/react-router'
 
 export const userFavoritedDatasQueryOptions = (userId: string, page: string, pageSize: string) =>
     queryOptions({
         queryKey: ['my-favorited-data-details', userId, page, pageSize],
-        queryFn: () => getUserFavoritedData(page, pageSize),
+        queryFn: () => fetch(`/api/protected/user-favorited/${page}/${pageSize}`)
+            .then((res) => res.json() as ReturnType<typeof getUserBookmarkedData>),
         placeholderData: keepPreviousData,
     })
 
@@ -54,30 +49,7 @@ function RouteComponent() {
                         You haven't favorited any saved data.
                     </p>
                     : null}
-                <ul className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
-                    {dataQuery.bookmarkedData.map(saved => (
-                        <li key={saved.id} className="border rounded shadow overflow-hidden hover:border-primary">
-                            <Link
-                                to="/saved-data/$id"
-                                params={{
-                                    id: String(saved.id),
-                                }}
-                                preloadDelay={600}
-                            >
-                                <img alt={saved.title} src={`${ASSETS_URL}/${saved.imgUrl}`}
-                                    className="aspect-video object-cover w-full" />
-                                <div className="grid grid-cols-[1fr_auto] items-center justify-end p-2 border-t">
-                                    <p className="text-left line-clamp-1">
-                                        {saved.title}
-                                    </p>
-                                    <p className="flex items-center gap-1 text-rose-400">
-                                        <FaHeart className="" /> {saved.bookmarkCount}
-                                    </p>
-                                </div>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
+                <ListSavedData savedData={dataQuery.bookmarkedData} />
                 <Pagination>
                     <PaginationContent>
                         <PaginationItem >

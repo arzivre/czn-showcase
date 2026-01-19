@@ -1,14 +1,14 @@
 import { NotFound } from '@/components/not-found';
 import { ASSETS_URL } from '@/constants/assets-url';
+import { toogleBookmarkFn } from '@/core/functions/bookmark';
 import { authClient } from '@/lib/auth-client';
 import { unslugify } from '@/utils/unslugify';
 import { queryOptions, useMutation, useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute, Link, notFound } from '@tanstack/react-router';
+import { Image } from "@unpic/react";
 import { Heart, Share2 } from 'lucide-react';
 import { FaHeart } from 'react-icons/fa6';
 import { toast } from 'sonner';
-import { useBatcher } from '@tanstack/react-pacer/batcher'
-import { Image } from "@unpic/react";
 
 type SavedDataDetail = Promise<{
   displayUsername: string | null;
@@ -57,24 +57,20 @@ function RouteComponent() {
   const { data: session } = authClient.useSession()
   const user = session?.user!
 
-  const { mutate: updateBookmark } = useMutation({
-    mutationFn: () =>
-      fetch(`/api/bookmark/${user?.id}/${savedData?.id}`, {
-        method: 'PUT',
-      }).then((res) => res.json()),
-    onSuccess: () => refetch(),
+  const { mutate: updateBookmark, isPending } = useMutation({
+    mutationFn: async (savedDataId: string) => await toogleBookmarkFn({ data: { savedDataId } }),
+    onMutate: () => toast('Loading Request'),
+    onSuccess: () => {
+      refetch()
+      toast('Favorite Updated')
+    },
   })
 
-  async function toogleBookmark() {
+  async function handleBookmark() {
     if (!user) return navigate({ to: '/login' })
     if (savedData?.userId === user.id) return toast.info('You cant bookmark your saved data')
-    updateBookmark()
+    updateBookmark(savedData?.id!)
   }
-
-  const batcher = useBatcher(
-    toogleBookmark,
-    { wait: 1500 }
-  );
 
   async function handleShare(title: string, text: string) {
     if (navigator.share) {
@@ -101,18 +97,18 @@ function RouteComponent() {
           </h1>
           <div className='col-span-3 w-full flex items-center justify-end gap-4 text-muted-foreground lg:col-span-2'>
             <button type="button"
-              onClick={() => batcher.addItem(null)}
+              onClick={handleBookmark}
               className='group cursor-pointer hover:underline'
             >
               {savedData?.isBookmarked ?
                 <p className='flex items-center'>
                   <FaHeart className='w-4 h-4 mr-1 text-rose-500' />
-                  Favorite
+                  {isPending ? 'Loading' : 'Favorite'}
                 </p>
                 :
                 <p className='flex items-center'>
                   <Heart className={'w-4 h-4 mr-1 group-hover:text-rose-500'} />
-                  Favorite
+                  {isPending ? 'Loading' : 'Favorite'}
                 </p>
               }
             </button>
