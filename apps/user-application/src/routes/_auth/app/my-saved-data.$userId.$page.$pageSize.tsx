@@ -33,7 +33,7 @@ import { toast } from "sonner"
 export const userSavedDatasQueryOptions = (userId: string, page: string, pageSize: string) =>
   queryOptions({
     queryKey: ['my-saved-data', userId, page, pageSize],
-    queryFn: () => fetch(`/api/protected/user-saved-data/${page}/${pageSize}`)
+    queryFn: () => fetch(`/api/user-saved-data/${userId}/${page}/${pageSize}`)
       .then((res) => res.json() as ReturnType<typeof getPaginatedSavedDataWithBookmarks>),
     placeholderData: keepPreviousData,
   })
@@ -86,9 +86,9 @@ function RouteComponent() {
         <h1 className='py-8 text-primary text-2xl'>
           My Saved Data
         </h1>
-        <ul className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
+        <ul className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-12 mb-8">
           {savedDataQuery?.savedData.map(saved => (
-            <li key={saved.id} className="border rounded shadow">
+            <li key={saved.id} className="group border rounded shadow">
               <Link
                 to="/saved-data/$id"
                 params={{
@@ -98,25 +98,27 @@ function RouteComponent() {
               >
                 <img alt={saved.title} src={`${ASSETS_URL}/${saved.imgUrl}`}
                   className="aspect-video object-cover w-full" />
+                  
                 <div className="flex items-center justify-between p-2">
-                  <p className="text-left line-clamp-1">
+                  <p className="text-left line-clamp-1 text-muted-foreground group-hover:text-secondary">
                     {saved.title}
                   </p>
                 </div>
               </Link>
+
               <div className="flex items-center justify-between p-2 border-t">
                 <div className="flex items-center space-x-4">
                   <Link to="/app/edit/$id" params={{ id: saved.id }}>
-                    <button type="button" className="text-muted-foreground cursor-pointer hover:text-white">Edit</button>
+                    <Button type="button" variant={'outline'}>Edit</Button>
                   </Link>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <button
+                      <Button
                         type="button"
-                        className="text-muted-foreground cursor-pointer hover:text-red-600"
+                        variant={'destructive'}
                       >
                         Delete
-                      </button>
+                      </Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">
                       <DialogHeader>

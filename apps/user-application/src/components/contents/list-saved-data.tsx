@@ -43,7 +43,7 @@ export function ListSavedData(props: TListSavedData) {
                             className="aspect-video object-cover w-full"
                         />
                         <div className="grid grid-cols-[1fr_auto] items-center justify-end p-2 border-t">
-                            <p className="text-left text-muted-foreground line-clamp-1 group-hover:text-white">
+                            <p className="text-left line-clamp-1 text-muted-foreground group-hover:text-secondary">
                                 {saved.title}
                             </p>
                             <p className="flex items-center gap-1 text-rose-400">
