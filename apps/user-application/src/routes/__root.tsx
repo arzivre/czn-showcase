@@ -92,8 +92,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <head>
           <HeadContent />
         </head>
-        <body className="min-h-screen bg-background">
-          <Toaster position="bottom-center" />
+        <body className="min-h-screen">
+          <Toaster position="top-right" />
           <NavigationBar />
           {children}
           <Footer />
