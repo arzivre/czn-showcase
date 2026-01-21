@@ -15,10 +15,10 @@
       "bucket_name": "czn-showcase"
     },
   ],
-  "hyperdrive": [
-    {
-      "binding": "HYPERDRIVE",
-      "id": "2b5e7cee5eed4d2eba9ce82183d1f92a",
-    }
-  ]
+  // "hyperdrive": [
+  //   {
+  //     "binding": "HYPERDRIVE",
+  //     "id": "2b5e7cee5eed4d2eba9ce82183d1f92a",
+  //   }
+  // ]
 }
